@@ -1,7 +1,10 @@
 from rest_framework.routers import DefaultRouter
-from .views import BookViewSet
+from django.urls import path
+from .views import BookViewSet, register
 
 router = DefaultRouter()
 router.register(r'books', BookViewSet, basename='book')
 
-urlpatterns = router.urls
+urlpatterns = router.urls + [
+    path('auth/register/', register, name='register'),
+]

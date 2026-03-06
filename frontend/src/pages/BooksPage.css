@@ -1,0 +1,450 @@
+/* ── CSS vars for star SVG ── */
+:root, [data-theme="dark"] {
+  --star-empty: rgba(255, 255, 255, 0.08);
+  --star-stroke: rgba(255, 255, 255, 0.12);
+}
+[data-theme="light"] {
+  --star-empty: rgba(0, 0, 0, 0.08);
+  --star-stroke: rgba(0, 0, 0, 0.12);
+}
+
+.books-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.book-card.spotlight::before {
+  background: radial-gradient(
+    500px circle at var(--sx, 50%) var(--sy, 50%),
+    rgba(200, 60, 100, 0.18) 0%,
+    rgba(160, 50, 180, 0.10) 35%,
+    rgba(80, 40, 160, 0.05) 60%,
+    transparent 80%
+  );
+}
+
+.books-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.books-header h1 {
+  color: var(--text-primary);
+  font-size: 2rem;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.books-count {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+}
+
+.books-loading,
+.books-empty {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 5rem 2rem;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.book-card {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 16px;
+  padding: 1.25rem;
+  transition: border-color 0.2s, background 0.3s ease;
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+
+.book-card:hover {
+  border-color: var(--border-card-hover);
+}
+
+.book-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.book-status {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.book-delete {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  font-size: 0.75rem;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: color 0.2s, background 0.2s, border-color 0.2s;
+  line-height: 1;
+}
+
+[data-theme="light"] .book-delete {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: rgba(17, 17, 17, 0.3);
+}
+
+.book-delete:hover {
+  color: #e94560;
+  background: rgba(233, 69, 96, 0.1);
+  border-color: rgba(233, 69, 96, 0.25);
+}
+
+.book-title {
+  color: var(--text-primary);
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+  line-height: 1.3;
+  transition: color 0.3s ease;
+}
+
+.book-author {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin: 0 0 0.75rem;
+  transition: color 0.3s ease;
+}
+
+/* ── Cover image ── */
+.book-cover-wrap {
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 0.9rem;
+  background: var(--bg-input);
+  border: 1px solid var(--border-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.book-cover-img {
+  width: 100%;
+  height: auto;
+  max-height: 260px;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.book-card:hover .book-cover-img {
+  transform: scale(1.02);
+}
+
+/* ── Genres ── */
+.book-genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 0.6rem;
+}
+
+.book-genre-tag {
+  font-size: 0.72rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 5px;
+  background: rgba(124, 58, 237, 0.12);
+  color: #a78bfa;
+  font-weight: 500;
+}
+
+[data-theme="light"] .book-genre-tag {
+  background: rgba(124, 58, 237, 0.08);
+  color: #7c3aed;
+}
+
+.book-genre {
+  display: inline-block;
+  background: rgba(233, 69, 96, 0.15);
+  color: #e94560;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  margin-bottom: 0.75rem;
+}
+
+.book-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.75rem;
+}
+
+.book-rating-stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+}
+
+.book-star-svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+.book-rating-num {
+  margin-left: 5px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #f59e0b;
+}
+
+.book-rating-empty {
+  color: var(--text-faint);
+  font-size: 0.9rem;
+}
+
+/* ── Progress bar ── */
+.book-progress {
+  margin: 0.6rem 0 0.1rem;
+}
+
+.book-progress-track {
+  height: 4px;
+  border-radius: 100px;
+  background: var(--border-card);
+  overflow: hidden;
+  margin-bottom: 0.3rem;
+}
+
+.book-progress-fill {
+  height: 100%;
+  border-radius: 100px;
+  background: linear-gradient(90deg, #e94560, #7c3aed);
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.book-progress-label {
+  font-size: 0.75rem;
+  color: var(--text-faint);
+  transition: color 0.3s ease;
+}
+
+.book-date {
+  color: var(--text-faint);
+  font-size: 0.8rem;
+  transition: color 0.3s ease;
+}
+
+.book-notes {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin: 0.75rem 0 0;
+  border-top: 1px solid var(--book-notes-border);
+  padding-top: 0.75rem;
+  line-height: 1.5;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+/* ── Delete Confirm Modal ── */
+.delete-modal {
+  position: relative;
+  overflow: hidden;
+  background: #111111;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 20px;
+  padding: 2rem 2rem 1.75rem;
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+  box-shadow:
+    0 32px 64px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.03),
+    0 0 80px rgba(233, 69, 96, 0.06);
+  animation: deleteModalIn 0.24s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Subtelna czerwona poświata u góry */
+.delete-modal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(233, 69, 96, 0.55), transparent);
+}
+
+/* Bardzo delikatny gradient na tle */
+.delete-modal::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(233, 69, 96, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+[data-theme="light"] .delete-modal {
+  background: #fefefe;
+  border-color: rgba(0, 0, 0, 0.07);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.12),
+    0 0 0 1px rgba(0, 0, 0, 0.04),
+    0 0 60px rgba(233, 69, 96, 0.04);
+}
+
+[data-theme="light"] .delete-modal::before {
+  background: linear-gradient(90deg, transparent, rgba(233, 69, 96, 0.4), transparent);
+}
+
+[data-theme="light"] .delete-modal::after {
+  background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(233, 69, 96, 0.04) 0%, transparent 70%);
+}
+
+@keyframes deleteModalIn {
+  from { opacity: 0; transform: scale(0.88) translateY(12px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.delete-modal-icon {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: rgba(233, 69, 96, 0.1);
+  border: 1px solid rgba(233, 69, 96, 0.2);
+  color: #e94560;
+  margin-bottom: 1.1rem;
+}
+
+[data-theme="light"] .delete-modal-icon {
+  background: rgba(233, 69, 96, 0.08);
+  border-color: rgba(233, 69, 96, 0.15);
+}
+
+.delete-modal-title {
+  position: relative;
+  z-index: 1;
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 0 0.55rem;
+  letter-spacing: -0.01em;
+}
+
+[data-theme="light"] .delete-modal-title {
+  color: #111111;
+}
+
+.delete-modal-body {
+  position: relative;
+  z-index: 1;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.875rem;
+  line-height: 1.65;
+  margin: 0 0 1.6rem;
+}
+
+[data-theme="light"] .delete-modal-body {
+  color: rgba(17, 17, 17, 0.5);
+}
+
+.delete-modal-book-title {
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 600;
+}
+
+[data-theme="light"] .delete-modal-book-title {
+  color: #111111;
+}
+
+.delete-modal-author {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+[data-theme="light"] .delete-modal-author {
+  color: rgba(17, 17, 17, 0.45);
+}
+
+.delete-modal-actions {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 0.65rem;
+}
+
+.delete-modal-cancel {
+  flex: 1;
+  padding: 0.72rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.delete-modal-cancel:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+[data-theme="light"] .delete-modal-cancel {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: rgba(17, 17, 17, 0.55);
+}
+
+[data-theme="light"] .delete-modal-cancel:hover {
+  background: rgba(0, 0, 0, 0.07);
+  border-color: rgba(0, 0, 0, 0.16);
+  color: #111111;
+}
+
+.delete-modal-confirm {
+  flex: 1;
+  padding: 0.72rem 1rem;
+  background: linear-gradient(135deg, #e94560 0%, #c23152 100%);
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(233, 69, 96, 0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.delete-modal-confirm:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(233, 69, 96, 0.55);
+}
